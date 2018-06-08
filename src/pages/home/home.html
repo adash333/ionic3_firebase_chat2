@@ -1,14 +1,59 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Ionic Firebase Chat
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="exitChat()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <section class="card">
+    <div class="card-body">
+      <ion-grid>
+        <ion-row>  
+          <ion-col col-2 class="media-left">
+            <div>
+              <a href="#" class="icon-rounded">S</a>
+            </div>
+          </ion-col>
+          <ion-col class="media-body">
+            <div>
+              <h4 class="media-heading">Suzuki Taro Date:2016/09/01</h4>
+              <div>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <hr>
+
+        <ion-row>
+          <ion-col class="media-body">
+            <h4 class="media-heading">Tanaka Jiro Date:2016/09/01</h4>
+            <div>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</div>
+          </ion-col>
+          <ion-col col-2 class="media-right">
+            <a href="#" class="icon-rounded">T</a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-10>
+        <ion-input type="text" placeholder="Type a message"></ion-input>
+      </ion-col>
+      <ion-col col-2 (click)="sendMessage()">
+        <ion-icon name="paper-plane"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
