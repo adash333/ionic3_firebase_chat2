@@ -15,26 +15,30 @@
   <section class="card">
     <div class="card-body">
       <ion-grid>
-        <ion-row>  
-          <ion-col col-2 class="media-left">
-            <div>
-              <a href="#" class="icon-rounded">S</a>
-            </div>
-          </ion-col>
-          <ion-col class="media-body">
-            <div>
-              <h4 class="media-heading">Suzuki Taro Date:2016/09/01</h4>
-              <div>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</div>
-            </div>
-          </ion-col>
-        </ion-row>
+        <ng-container *ngFor="let comment of comments">
+          <ion-row>  
+            <ion-col col-2 class="media-left">
+              <div>
+                <a href="#" class="icon-rounded">S</a>
+              </div>
+            </ion-col>
+            <ion-col class="media-body">
+              <div>
+                <h4 class="media-heading">{{ comment.name }}}Date:2016/09/01</h4>
+                <div>{{ comment.content }}</div>
+              </div>
+            </ion-col>
+          </ion-row>
 
-        <hr>
-
+          <hr>
+        </ng-container>
+      </ion-grid>
+      
+      <ion-grid>
         <ion-row>
           <ion-col class="media-body">
             <h4 class="media-heading">Tanaka Jiro Date:2016/09/01</h4>
-            <div>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</div>
+            <div>{{ content }}</div>
           </ion-col>
           <ion-col col-2 class="media-right">
             <a href="#" class="icon-rounded">T</a>
@@ -49,7 +53,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-10>
-        <ion-input type="text" placeholder="Type a message"></ion-input>
+        <ion-input type="text" [(ngModel)]="content" name="content" placeholder="Type a message"></ion-input>
       </ion-col>
       <ion-col col-2 (click)="sendMessage()">
         <button ion-button>Send</button>
