@@ -25,7 +25,7 @@
 
             <ion-col class="media-body">
               <div>
-                <h4 class="media-heading">{{ comment.user.name }} Date:2016/09/01</h4>
+                <h4 class="media-heading">{{ comment.user.name }} Date:{{comment.date | date:'yyyy/MM/dd EEEE HH:mm:ss' }}</h4>
                 <div>{{ comment.content }}</div>
               </div>
             </ion-col>
