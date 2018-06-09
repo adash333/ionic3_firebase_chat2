@@ -14,37 +14,37 @@
 <ion-content>
   <section class="card">
     <div class="card-body">
-      <ion-grid>
-        <ng-container *ngFor="let comment of comments">
-          <ion-row>  
+      <ng-container *ngFor="let comment of comments">
+        <!-- current_user.idとcomment.user.uidが等しくない場合に表示-->
+        <ion-grid *ngIf="comment.user.uid !== current_user.uid">
+          <ion-row>
             <ion-col col-2 class="media-left">
               <div>
-                <a href="#" class="icon-rounded">S</a>
+                <a href="#" class="icon-rounded">{{ comment.initial }}</a>
               </div>
             </ion-col>
             <ion-col class="media-body">
               <div>
-                <h4 class="media-heading">{{ comment.name }}}Date:2016/09/01</h4>
+                <h4 class="media-heading">{{ comment.name }} Date:2016/09/01</h4>
                 <div>{{ comment.content }}</div>
               </div>
             </ion-col>
           </ion-row>
-
           <hr>
-        </ng-container>
-      </ion-grid>
-      
-      <ion-grid>
-        <ion-row>
-          <ion-col class="media-body">
-            <h4 class="media-heading">Tanaka Jiro Date:2016/09/01</h4>
-            <div>{{ content }}</div>
-          </ion-col>
-          <ion-col col-2 class="media-right">
-            <a href="#" class="icon-rounded">T</a>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        </ion-grid>
+        <!-- current_user.idとcomment.user.uidが等しい場合に表示-->
+        <ion-grid *ngIf="comment.user.uid === current_user.uid">
+          <ion-row>
+            <ion-col class="media-body">
+              <h4 class="media-heading">{{ comment.user.name }} Date:2016/09/01</h4>
+              <div>{{ comment.content }}</div>
+            </ion-col>
+            <ion-col col-2 class="media-right">
+              <a href="#" class="icon-rounded">{{ comment.initial }}</a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ng-container>
     </div>
   </section>
 </ion-content>
