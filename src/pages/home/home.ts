@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
+//import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Comment, User } from '../../models/chat';
 
@@ -18,13 +20,32 @@ const COMMENTS: Comment[] = [
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(Content) contents: Content;
   
   public content = '';
   public comments = COMMENTS;
   public current_user = CURRENT_USER;
   
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController
+  ) {
+  }
 
+  ionViewDidLoad()
+  {
+     setTimeout(() => {
+        this.contents.scrollToBottom(300);
+     }, 1000);
+  }
+
+  addComment(comment: string) {
+    if (comment) {
+      this.comments.push(new Comment(this.current_user, comment));
+      this.content = '';
+      setTimeout(() => {
+        this.contents.scrollToBottom(300);
+      }, 1000);
+    }
   }
 
 }

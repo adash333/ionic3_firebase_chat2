@@ -25,7 +25,7 @@
 
             <ion-col class="media-body">
               <div>
-                <h4 class="media-heading">{{ comment.name }} Date:2016/09/01</h4>
+                <h4 class="media-heading">{{ comment.user.name }} Date:2016/09/01</h4>
                 <div>{{ comment.content }}</div>
               </div>
             </ion-col>
@@ -45,14 +45,16 @@
 </ion-content>
 
 <ion-footer>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-10>
-        <ion-input type="text" [(ngModel)]="content" name="content" placeholder="Type a message"></ion-input>
-      </ion-col>
-      <ion-col col-2 (click)="sendMessage()">
-        <button ion-button>Send</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form (submit)="addComment(content)">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-10>
+          <ion-input type="text" [(ngModel)]="content" name="comment" placeholder="Type a message"></ion-input>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button type="submit">SEND</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-footer>
