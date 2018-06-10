@@ -20,4 +20,10 @@ export class Comment {
     this.content = content;
     this.date = Date.now();
   }
+
+  // 取得した日付を反映
+  setData(date: number): Comment {
+    this.date = date;
+    return this;
+  }
 }
