@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 //import { FormBuilder, FormGroup } from '@angular/forms';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/observable';
 
 import { Comment, User } from '../../models/chat';
 
@@ -21,14 +23,18 @@ const COMMENTS: Comment[] = [
 })
 export class HomePage {
   @ViewChild(Content) contents: Content;
+
+  item: Observable<{}>;
   
   public content = '';
   public comments = COMMENTS;
   public current_user = CURRENT_USER;
   
   constructor(
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    db: AngularFireDatabase
   ) {
+    this.item = db.object('item').valueChanges();
   }
 
   ionViewDidLoad()
