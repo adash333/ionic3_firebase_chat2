@@ -48,4 +48,19 @@ page-home {
   .chart-form {
     margin: 20px 0;
   }
+
+  .card .media-body div.edit-buttons {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .card .media-body div.edit-buttons .btn {
+    width: 100px;
+  }
+
+  .card .media-body div.input-group {
+    background-color: white;
+    border-radius: 10px;
+  }
+
 }

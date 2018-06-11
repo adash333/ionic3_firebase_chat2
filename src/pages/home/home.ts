@@ -35,11 +35,11 @@ export class HomePage {
       actions.forEach((action: any) => {
         // 取得したデータを反映
         const val = action.payload.val();
-        this.comments.push(new Comment(val.user, val.content).setData(val.date));
+        const key = action.payload.key;
+        this.comments.push(new Comment(val.user, val.content).setData(val.date, key));
       });
     });
   }
-
 
   ionViewDidLoad()
   {
@@ -48,6 +48,7 @@ export class HomePage {
      }, 1000);
   }
 
+  // 新規コメント追加
   addComment(comment: string) {
     if (comment) {
       this.FB_comments.push(new Comment(this.current_user, comment));
@@ -56,6 +57,34 @@ export class HomePage {
         this.contents.scrollToBottom(300);
       }, 1000);
     }
+  }
+
+  // 編集フィールドの切り替え
+  toggleEditComment(num: number) {
+    this.comments[num].edit_flag = (this.comments[num].edit_flag) ? false : true; 
+  }
+
+  // コメントを更新
+  saveEditComment(num: number, key: string) {
+    this.FB_comments.update(key, {
+      content: this.comments[num].content,
+      date: this.comments[num].date
+    }).then( () => {
+      alert('コメントを更新しました')
+      this.comments[num].edit_flag = false;
+    });
+  }
+  
+  // コメントをリセット
+  resetEditComment(num: number) {
+    this.comments[num].content = '';
+  }
+
+  // コメントを削除
+  deleteComment(key: string) {
+    this.FB_comments.remove(key).then(() => {
+      alert('コメントを削除しました');
+    });
   }
 
 }
