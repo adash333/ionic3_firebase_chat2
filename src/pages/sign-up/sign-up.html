@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>
+        アカウントを新規作成
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-list>
+      
+      <ion-item>
+        <ion-label floating>Email address</ion-label>
+        <ion-input type="email" [(ngModel)]="inputEmail"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="inputPassword"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password Confirmation</ion-label>
+        <ion-input type="password" [(ngModel)]="confirmationPassword"></ion-input>
+      </ion-item>
+  
+    </ion-list>
+  
+    <button ion-button block color="secondary" (click)="signUp()">SIGN UP</button>
+  
+  </ion-content>
+  
