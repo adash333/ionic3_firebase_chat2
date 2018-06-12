@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { SignUpPage } from '../sign-up/sign-up';;
+import { SignUpPage } from '../sign-up/sign-up';
+import { HomePage } from '../home/home';
 
 //import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+//import { Subject } from 'rxjs/Subject';
+import { SessionProvider } from '../../providers/session/session';
 
 @IonicPage()
 @Component({
@@ -13,27 +15,28 @@ import { Subject } from 'rxjs/Subject';
 })
 export class LoginPage {
 
-  public loginSubject: Subject<number> = new Subject();
-  public loginState = this.loginSubject.asObservable();
-  public count = 0;
+  public login: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private sessionService: SessionProvider
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    this.loginState.subscribe((data: number) => {
-      console.log(data);
-    })
-  }
-
-  clickNext() {
-    this.count++;
-    this.loginSubject.next(this.count);
+    this.login = this.sessionService.session.login;
+    console.log('LoginPage-login:' + this.login);
   }
 
   goToSignUpPage() {
     this.navCtrl.push(SignUpPage);
+  }
+
+  submitLogin() {
+    this.sessionService.login();
+    this.navCtrl.push(HomePage);
   }
 
 }

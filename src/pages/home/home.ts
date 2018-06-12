@@ -6,6 +6,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 //import { Observable } from 'rxjs/observable';
 
 import { Comment, User } from '../../models/chat';
+import { SessionProvider } from '../../providers/session/session';
+import { Session } from '../../models/session';
+//import { LoginPage } from '../login/login';
 
 const CURRENT_USER: User = new User(1, 'Tanaka Jiro');
 // const ANOTHER_USER: User = new User(2, 'Suzuki Taro');
@@ -16,6 +19,7 @@ const CURRENT_USER: User = new User(1, 'Tanaka Jiro');
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public login = false;
   @ViewChild(Content) contents: Content;
 
   //item: Observable<{}>;
@@ -26,7 +30,8 @@ export class HomePage {
   
   constructor(
     public navCtrl: NavController,
-    db: AngularFireDatabase
+    db: AngularFireDatabase,
+    public sessionService: SessionProvider
   ) {
     //this.item = db.object('item').valueChanges();
     this.FB_comments = db.list('/comments');
@@ -41,11 +46,15 @@ export class HomePage {
     });
   }
 
-  ionViewDidLoad()
-  {
-     setTimeout(() => {
-        this.contents.scrollToBottom(300);
-     }, 1000);
+  ionViewDidLoad() {
+    this.sessionService.sessionState.subscribe((session: Session) => {
+      if(session) {
+        this.login = session.login;
+      }
+    })
+    setTimeout(() => {
+      this.contents.scrollToBottom(300);
+    }, 1000);
   }
 
   // 新規コメント追加
@@ -86,5 +95,12 @@ export class HomePage {
       alert('コメントを削除しました');
     });
   }
+
+  /*
+  logout(): void {
+    this.sessionService.logout();
+    this.navCtrl.pop();
+  }
+  */
 
 }
