@@ -6,27 +6,40 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content padding>
-    <ion-list>
-      
-      <ion-item>
-        <ion-label floating>Email address</ion-label>
-        <ion-input type="email" [(ngModel)]="inputEmail"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="inputPassword"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Password Confirmation</ion-label>
-        <ion-input type="password" [(ngModel)]="confirmationPassword"></ion-input>
-      </ion-item>
-  
-    </ion-list>
-  
-    <button ion-button block color="secondary" (click)="signUp()">SIGN UP</button>
-  
-  </ion-content>
+<ion-content padding>
+		<form (ngSubmit)="submitSignUp($event)" #signUpForm="ngForm"><!-- 追加 -->
+			
+			<ion-item>
+				<ion-label floating for="inputEmail">Email address</ion-label>
+	    	<ion-input type="email" name="email" 
+					placeholder="Email address" 
+					[(ngModel)]="account.email" 
+					#email="ngModel"
+					autocomplete="username email" required autofocus><!-- name, autocompleteを追加 --></ion-input>
+			</ion-item>	
+			
+			<ion-item>
+				<ion-label floating for="inputPassword">Password</ion-label>
+				<ion-input type="password" name="password"
+					placeholder="Password" 
+					[(ngModel)]="account.password" 
+					#password="ngModel"	    	
+					autocomplete="new-password" required><!-- name, autocompleteを追加 --></ion-input>
+			</ion-item>	
+		
+			<ion-item>
+				<ion-label floating for="confirmationPassword">Password Confirmation</ion-label>
+				<ion-input type="password" name="password_confirmation" 
+					placeholder="Password Confirmation" 
+					[(ngModel)]="account.password_confirmation" 
+					#password_confirmation="ngModel"	    	
+					autocomplete="new-password" required><!-- name, autocompleteを追加 --></ion-input>
+			</ion-item>	
+			
+			<button ion-button block color="secondary"
+	    	type="submit" [disabled]="!signUpForm.form.valid">
+	    	SIGN UP
+	    </button><!-- clickイベントを削除し、disabledを追加 -->
+	</form>
+</ion-content>
   

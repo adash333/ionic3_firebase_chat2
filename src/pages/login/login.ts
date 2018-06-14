@@ -4,9 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SignUpPage } from '../sign-up/sign-up';
 import { HomePage } from '../home/home';
 
-//import { Observable } from 'rxjs/Observable';
-//import { Subject } from 'rxjs/Subject';
 import { SessionProvider } from '../../providers/session/session';
+import { Password } from '../../models/password';
 
 @IonicPage()
 @Component({
@@ -15,7 +14,8 @@ import { SessionProvider } from '../../providers/session/session';
 })
 export class LoginPage {
 
-  public login: boolean;
+  //public login: boolean;
+  public account = new Password();
 
   constructor(
     public navCtrl: NavController,
@@ -26,16 +26,17 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    this.login = this.sessionService.session.login;
-    console.log('LoginPage-login:' + this.login);
+    //this.login = this.sessionService.session.login;
+    //console.log('LoginPage-login:' + this.login);
   }
 
   goToSignUpPage() {
     this.navCtrl.push(SignUpPage);
   }
 
-  submitLogin() {
-    this.sessionService.login();
+  submitLogin(e: Event) {
+    e.preventDefault();
+    this.sessionService.login(this.account);
     this.navCtrl.push(HomePage);
   }
 

@@ -7,21 +7,32 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    
+  <form (ngSubmit)="submitLogin($event)" #loginForm="ngForm">
     <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
+      <ion-label floating for="inputEmail">Email address</ion-label>
+      <ion-input type="email" name="email"
+        placeholder="Email address"
+        [(ngModel)]="account.email" 
+        #email="ngModel"
+        autocomplete="username email" required autofocus>
+      </ion-input>
     </ion-item>
-
     <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
+      <ion-label floating for="inputPassword">Password</ion-label>
+      <ion-input type="password" name="password" 
+        placeholder="Password"
+        [(ngModel)]="account.password" 
+        #password="ngModel"         
+        autocomplete="new-password" required>
+      </ion-input>
     </ion-item>
+  
+    <button ion-button block type="submit" 
+      [disabled]="!loginForm.form.valid">
+      LOGIN
+    </button>
+  </form>
 
-  </ion-list>
-
-  <button ion-button block (click)="submitLogin()">ログイン</button>
   <button ion-button block color="secondary" (click)="goToSignUpPage()">アカウントを新規作成</button>
 
 </ion-content>
